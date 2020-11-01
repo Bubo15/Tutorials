@@ -1,0 +1,70 @@
+{{#if isLogged}}
+<h1 class="text-center">Courses</h1>
+<section>
+    <a href="/create/course" class="btn btn-warning ">Create Course</a>
+  
+    <form class="search float-right" action="/search" method="GET">
+        <label>Search: </label>
+        <input type="text" name="text">
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
+
+</section>
+
+{{else}}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Tutorials</h1>
+        <p class="lead">Start Self-Learning Today: Be the best Developer in the company</p>
+    </div>
+</div>
+
+<h1 class="text-center">Top Courses</h1>
+
+{{/if}}
+
+<div class="container mt-3">
+    {{#if isLogged}}
+    {{/if}}
+    <div class="row">
+        {{#if isLogged}}
+
+        {{#each courses}}
+        <div class="card-deck d-flex justify-content-center">
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{imageUrl}}" alt="Card image cap" width="400">
+                <div class="card-body">
+                    <h4 class="card-title">{{title}}</h4>
+                </div>
+                <div class="card-footer">
+                    <a href="/details/course/{{_id}}"><button type="button" class="btn btn-primary">Details</button></a>
+                    <small class="float-right">{{createdAt}}</small>
+                </div>
+            </div>
+        </div>
+        {{else}}
+       
+        <h3 class="no-found">No courses...</h3>
+       
+        {{/each}}
+
+        {{else}}
+
+        {{#each courses}}
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{imageUrl}}" alt="Card image cap" width="400">
+            <div class="card-body">
+                <h4 class="card-title">{{title}}</h4>
+                <small class="float-right">Enrolled: {{usersEnrolled.length}}</small>
+            </div>
+        </div>
+
+        {{else}}
+        <h3 class="no-found">No courses...</h3>
+        {{/each}}
+
+        {{/if}}
+
+    </div>
+</div>
